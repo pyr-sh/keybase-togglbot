@@ -1,0 +1,13 @@
+{
+  "name": "togglbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pzduniak/togglbot.git",
+  "author": "Piotr Zduniak",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "keybase-bot": "^3.6.1",
+    "moment": "^2.24.0"
+  }
+}
