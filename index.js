@@ -53,6 +53,8 @@ async function main() {
           // At this point we're certain the user is trying to interact with the bot
           const parts = msg.content.text.body.split(' ')
           if (parts[1] === 'budget') {
+            const queriedMonth = parts[2] || moment().format('MMMM')
+
             // Requesting the budget!
             try {
               let agg = {}
@@ -66,8 +68,8 @@ async function main() {
                     'user_agent': 'bot+toggl@zduniak.net',
                     'workspace_id': secrets.toggl.workspace_id,
                     'project_ids': secrets.toggl.project_id,
-                    'since': moment().startOf('month').format('YYYY-MM-DD'),
-                    'until': moment().endOf('month').format('YYYY-MM-DD'),
+                    'since': moment(queriedMonth, 'MMMM').startOf('month').format('YYYY-MM-DD'),
+                    'until': moment(queriedMonth, 'MMMM').endOf('month').format('YYYY-MM-DD'),
                     'display_hours': 'decimal',
                     'page': page,
                   },
