@@ -53,7 +53,8 @@ async function main() {
           // At this point we're certain the user is trying to interact with the bot
           const parts = msg.content.text.body.split(' ')
           if (parts[1] === 'budget') {
-            const queriedMonth = parts[2] || moment().format('MMMM')
+            const thisMonth = moment().format('MMMM')
+            const queriedMonth = moment(parts[2] || thisMonth, 'MMMM').format('MMMM')
 
             // Requesting the budget!
             try {
@@ -117,7 +118,7 @@ async function main() {
               const totalAmount = table.map(row => row.amount).reduce((a, b) => a + b, 0).toFixed(2)
 
               bot.chat.send(msg.conversationId, {
-                body: `This month ${joinedNames} worked ${totalHours}h for a total cost of $${totalAmount}`,
+                body: `${queriedMonth === thisMonth ? 'This month' : `In ${queriedMonth}`} ${joinedNames} worked ${totalHours}h for a total cost of $${totalAmount}`,
               })
             } catch(e) {
               if (e.responseBody) {
